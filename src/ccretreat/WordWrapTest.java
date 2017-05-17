@@ -33,4 +33,9 @@ public class WordWrapTest {
 	public void commasStickToWord() throws Exception {
 		assertThat(wörterUmbrechen("a ,b c,"), is(new String[]{"a", ",b", "c,"}));
 	}
+
+	@Test
+	public void commasAsWords() throws Exception {
+		assertThat(wörterUmbrechen("a , b c,"), is(new String[]{"a", ",", "b", "c,"}));
+	}
 }
