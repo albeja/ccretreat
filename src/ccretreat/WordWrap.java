@@ -1,5 +1,7 @@
 package ccretreat;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,5 +22,30 @@ public class WordWrap {
 
 	static String ausgabeTextAufbereiten(String[] zeilen) {
 		return String.join("\n", zeilen);
+	}
+
+	static String[] worteDerZeileBestimmen(List<String> wortliste, int maxLength) {
+		final int wordSeparatorLength = 1;
+		List<String> wortgruppe = new ArrayList<>();
+		int currentLineLength = 0;
+		while(!wortliste.isEmpty()){
+			String currentWord = wortliste.get(0);
+			
+			int newLineLength = currentLineLength + currentWord.length();
+			boolean inTheMiddleOfTheLine = currentLineLength > 0;
+			if (inTheMiddleOfTheLine){
+				newLineLength += wordSeparatorLength;
+			}
+			
+			boolean lineCompleted = newLineLength > maxLength;
+			if (lineCompleted){
+				break;
+			}
+			
+			wortgruppe.add(currentWord);
+			wortliste.remove(0);
+			currentLineLength = newLineLength;
+		}
+		return wortgruppe.toArray(new String[]{});
 	}
 }
