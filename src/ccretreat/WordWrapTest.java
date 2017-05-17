@@ -25,27 +25,27 @@ public class WordWrapTest {
 	}
 	
 	@Test
-	public void multipleSpacesAreIgnored() throws Exception {
+	public void multipleSpacesAreIgnored() {
 		assertThat(wörterUmbrechen("a  b c  "), is(new String[]{"a", "b", "c"}));
 	}
 	
 	@Test
-	public void commasStickToWord() throws Exception {
+	public void commasStickToWord() {
 		assertThat(wörterUmbrechen("a ,b c,"), is(new String[]{"a", ",b", "c,"}));
 	}
 
 	@Test
-	public void commasAsWords() throws Exception {
+	public void commasAsWords() {
 		assertThat(wörterUmbrechen("a , b c,"), is(new String[]{"a", ",", "b", "c,"}));
 	}
 	
 	@Test
-	public void newlinesAreIgnored() throws Exception {
+	public void newlinesAreIgnored() {
 		assertThat(wörterUmbrechen("\na\n\nb\n"), is(new String[]{"a", "b"}));
 	}
 	
 	@Test
-	public void wordsAreYankedWithNewline() throws Exception {
+	public void wordsAreYankedWithNewline() {
 		assertThat(WordWrap.ausgabeTextAufbereiten(new String[]{"x", "y", "z"}), is("x\ny\nz"));
 	}
 }
