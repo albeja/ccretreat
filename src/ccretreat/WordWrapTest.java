@@ -75,4 +75,28 @@ public class WordWrapTest {
 		assertThat(wortliste.toArray(), is(expectedRemainingWortliste));
 		assertThat(wortgruppe, is(expectedWortgruppe));
 	}
+	
+	@Test
+	public void oneWordPerLine() {
+		List<String> wortliste = new ArrayList<>();
+		wortliste.addAll(Arrays.asList("a", "b", "c"));
+		int maxLength = 1;
+		
+		String[][] lines = WordWrap.worteZusammenfassenProZeile(wortliste, maxLength);
+		
+		String[][] expectedLines = new String[][]{{"a"}, {"b"}, {"c"}};		
+		assertThat(lines, is(expectedLines));
+	}
+	
+	@Test
+	public void multipleWordsPerLine() {
+		List<String> wortliste = new ArrayList<>();
+		wortliste.addAll(Arrays.asList("a", "b", "c"));
+		int maxLength = 3;
+		
+		String[][] lines = WordWrap.worteZusammenfassenProZeile(wortliste, maxLength);
+		
+		String[][] expectedLines = new String[][]{{"a", "b"}, {"c"}};		
+		assertThat(lines, is(expectedLines));
+	}
 }
