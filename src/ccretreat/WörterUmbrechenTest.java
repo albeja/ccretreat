@@ -37,4 +37,5 @@ public class WörterUmbrechenTest {
 	public void newlinesAreIgnored() {
 		assertThat(wörterUmbrechen("\na\n\nb\n"), is(new String[]{"a", "b"}));
 	}
+	
 }

@@ -13,8 +13,4 @@ public class WordWrapTest {
 		assertThat(umbrechen("a\nb\nc", 1), is("a\nb\nc"));
 	}
 	
-	@Test
-	public void wordsAreYankedWithNewline() {
-		assertThat(WordWrap.ausgabeTextAufbereiten(new String[]{"x", "y", "z"}), is("x\ny\nz"));
-	}
 }
