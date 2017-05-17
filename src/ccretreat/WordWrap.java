@@ -15,4 +15,8 @@ public class WordWrap {
 				.collect(Collectors.toList())
 				.toArray(new String[]{});
 	}
+
+	static String ausgabeTextAufbereiten(String[] zeilen) {
+		return String.join("\n", zeilen);
+	}
 }

@@ -15,7 +15,7 @@ public class WordWrapTest {
 	}
 	
 	@Test
-	public void wordsAreSeperatedByOneSpace(){
+	public void wordsAreSeparatedByOneSpace(){
 		assertThat(wörterUmbrechen("a b c"), is(new String[]{"a", "b", "c"}));
 	}
 	
@@ -42,5 +42,10 @@ public class WordWrapTest {
 	@Test
 	public void newlinesAreIgnored() throws Exception {
 		assertThat(wörterUmbrechen("\na\n\nb\n"), is(new String[]{"a", "b"}));
+	}
+	
+	@Test
+	public void wordsAreYankedWithNewline() throws Exception {
+		assertThat(WordWrap.ausgabeTextAufbereiten(new String[]{"x", "y", "z"}), is("x\ny\nz"));
 	}
 }
