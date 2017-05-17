@@ -6,7 +6,9 @@ import java.util.stream.Stream;
 public class WordWrap {
 
 	public static String umbrechen(String text, int maxZeilenlänge){
-		return text;
+		String[] wörter = wörterUmbrechen(text);
+		String ausgabeText = ausgabeTextAufbereiten(wörter);
+		return ausgabeText;
 	}
 
 	static String[] wörterUmbrechen(String text) {
