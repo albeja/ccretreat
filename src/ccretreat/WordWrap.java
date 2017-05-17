@@ -10,7 +10,7 @@ public class WordWrap {
 	}
 
 	static String[] wörterUmbrechen(String text) {
-		return Stream.of(text.split(" "))
+		return Stream.of(text.split("\\s"))
 				.filter(s -> !s.isEmpty())
 				.collect(Collectors.toList())
 				.toArray(new String[]{});

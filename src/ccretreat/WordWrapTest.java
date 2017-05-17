@@ -38,4 +38,9 @@ public class WordWrapTest {
 	public void commasAsWords() throws Exception {
 		assertThat(wörterUmbrechen("a , b c,"), is(new String[]{"a", ",", "b", "c,"}));
 	}
+	
+	@Test
+	public void newlinesAreIgnored() throws Exception {
+		assertThat(wörterUmbrechen("\na\n\nb\n"), is(new String[]{"a", "b"}));
+	}
 }
