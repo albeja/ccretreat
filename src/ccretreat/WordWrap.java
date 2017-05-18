@@ -63,7 +63,7 @@ public class WordWrap {
 	static String[] alleZeilenAusWortgruppenBauen(String[][] wortgruppen) {
 		List<String> zeilen = new ArrayList<>();
 		final String wortTrenner = " ";
-		for(String[] wortgruppe:wortgruppen){
+		for(String[] wortgruppe : wortgruppen){
 			String zeile = String.join(wortTrenner, wortgruppe);
 			zeilen.add(zeile);
 		}

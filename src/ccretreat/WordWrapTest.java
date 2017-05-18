@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -116,4 +117,37 @@ public class WordWrapTest {
 		String[] expectedZeilen = new String[]{"a b", "c d"};
 		assertThat(WordWrap.alleZeilenAusWortgruppenBauen(wortgruppen), is(expectedZeilen));
 	}
+	
+	@Test
+	public void testName() {
+		String[] worte = new String[]{"a", "bcd", "efghi"};
+		int maximaleZeilenlänge = 2;
+		
+		String[] actualSilben = zuLangeWorteTrennen(worte, maximaleZeilenlänge);
+		String[] expectedSilben = new String[]{"a", "bc", "d", "ef", "gh", "i"};
+
+		assertThat(actualSilben, is(expectedSilben));
+	}
+
+	private String[] zuLangeWorteTrennen(String[] worte, int maximaleZeilenlänge) {
+		List<String> silben = new ArrayList<>();
+		for(String wort : worte){
+			silben.addAll(split(wort, maximaleZeilenlänge));
+		}
+		return silben.toArray(new String[]{});
+	}
+
+	private List<String> split(String wort, int maximaleZeilenlänge) {
+		List<String> silben = new ArrayList<>();
+		if(wort.length() <= maximaleZeilenlänge){
+			return Collections.singletonList(wort);
+		}
+		int loops = wort.length() / maximaleZeilenlänge;
+		for(int i = 0; i < loops; i++) {
+			silben.add(wort.substring(i * maximaleZeilenlänge, (i + 1) * maximaleZeilenlänge));
+		}
+		silben.add(wort.substring(maximaleZeilenlänge * loops));
+		return silben;
+	}
+	
 }
