@@ -2,6 +2,7 @@ package ccretreat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,7 +11,8 @@ public class WordWrap {
 
 	public static String umbrechen(String text, int maxZeilenlänge){
 		String[] wörter = wörterUmbrechen(text);
-		String[] zeilen = zeilenBauen(wörter, maxZeilenlänge);
+		String[] silben = zuLangeWorteTrennen(wörter, maxZeilenlänge);
+		String[] zeilen = zeilenBauen(silben, maxZeilenlänge);
 		String ausgabeText = ausgabeTextAufbereiten(zeilen);
 		return ausgabeText;
 	}
@@ -75,5 +77,26 @@ public class WordWrap {
 		wörter.addAll(Arrays.asList(worte));
 		String[][] zeilen = worteZusammenfassenProZeile(wörter, maxLength);
 		return alleZeilenAusWortgruppenBauen(zeilen);
+	}
+
+	static String[] zuLangeWorteTrennen(String[] worte, int maximaleZeilenlänge) {
+		List<String> silben = new ArrayList<>();
+		for(String wort : worte){
+			silben.addAll(WordWrap.split(wort, maximaleZeilenlänge));
+		}
+		return silben.toArray(new String[]{});
+	}
+
+	static List<String> split(String wort, int maximaleZeilenlänge) {
+		if(wort.length() <= maximaleZeilenlänge) {
+			return Collections.singletonList(wort);
+		}
+		List<String> silben = new ArrayList<>();
+		int silbenAnzahl = wort.length() / maximaleZeilenlänge;
+		for(int i = 0; i < silbenAnzahl; i++) {
+			silben.add(wort.substring(i * maximaleZeilenlänge, (i + 1) * maximaleZeilenlänge));
+		}
+		silben.add(wort.substring(maximaleZeilenlänge * silbenAnzahl));
+		return silben;
 	}
 }

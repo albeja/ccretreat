@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
@@ -119,32 +120,49 @@ public class WordWrapTest {
 	}
 	
 	@Test
-	public void testName() {
+	public void langeWörterUmbrechen() {
+		String text = "Es blaut die Nacht,\n" +
+				"die Sternlein blinken,\n" +
+				"Schneeflöcklein leis hernieder sinken.";
+		
+		String actualText = WordWrap.umbrechen(text, 14);
+		
+		String expectedText = "Es blaut die\n" + 
+				"Nacht, die\n" + 
+				"Sternlein\n" + 
+				"blinken,\n" + 
+				"Schneeflöcklei\n" + 
+				"n leis\n" + 
+				"hernieder\n" + 
+				"sinken.";
+		
+		assertThat(actualText, is(expectedText));
+	}
+	
+	@Test
+	public void zuLangeWorteTrennen() {
 		String[] worte = new String[]{"a", "bcd", "efghi"};
 		int maximaleZeilenlänge = 2;
 		
-		String[] actualSilben = zuLangeWorteTrennen(worte, maximaleZeilenlänge);
+		String[] actualSilben = WordWrap.zuLangeWorteTrennen(worte, maximaleZeilenlänge);
+		
 		String[] expectedSilben = new String[]{"a", "bc", "d", "ef", "gh", "i"};
-
 		assertThat(actualSilben, is(expectedSilben));
 	}
-
-	private String[] zuLangeWorteTrennen(String[] worte, int maximaleZeilenlänge) {
-		List<String> silben = new ArrayList<>();
-		for(String wort : worte){
-			silben.addAll(split(wort, maximaleZeilenlänge));
-		}
-		return silben.toArray(new String[]{});
-	}
-
-	private List<String> split(String wort, int maximaleZeilenlänge) {
-		List<String> silben = new ArrayList<>();
-		int loops = wort.length() / maximaleZeilenlänge;
-		for(int i = 0; i < loops; i++) {
-			silben.add(wort.substring(i * maximaleZeilenlänge, (i + 1) * maximaleZeilenlänge));
-		}
-		silben.add(wort.substring(maximaleZeilenlänge * loops));
-		return silben;
+	
+	@Test
+	public void kurzeWorteNichtTrennen() {
+		String[] worte = new String[]{"a", "b", "c"};
+		int maximaleZeilenlänge = 1;
+		
+		String[] actualSilben = WordWrap.zuLangeWorteTrennen(worte, maximaleZeilenlänge);
+		
+		String[] expectedSilben = new String[]{"a", "b", "c"};
+		assertThat(actualSilben, is(expectedSilben));
 	}
 	
+	@Test
+	public void split() {
+		assertThat(WordWrap.split("a", 1), is(Arrays.asList("a")));
+	}
 }
