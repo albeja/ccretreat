@@ -18,6 +18,15 @@ public class WordWrapTest {
 	}
 	
 	@Test
+	public void zeilenAusWortenBauen() {
+		String[] worte = new String[]{"a", "b", "c"};
+		int maxLength = 3;
+		
+		String[] expectedZeilen = new String[]{"a b", "c"};
+		assertThat(WordWrap.zeilenBauen(worte, maxLength), is(expectedZeilen));
+	}
+	
+	@Test
 	public void emptyWordlist() {
 		List<String> wortliste = new ArrayList<>();
 		int maxLength = 3;
@@ -98,5 +107,13 @@ public class WordWrapTest {
 		
 		String[][] expectedLines = new String[][]{{"a", "b"}, {"c"}};		
 		assertThat(lines, is(expectedLines));
+	}
+	
+	@Test
+	public void testName() {
+		String[][] wortgruppen= new String[][]{{"a", "b"}, {"c", "d"}};
+		
+		String[] expectedZeilen = new String[]{"a b", "c d"};
+		assertThat(WordWrap.alleZeilenAusWortgruppenBauen(wortgruppen), is(expectedZeilen));
 	}
 }

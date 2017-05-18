@@ -1,6 +1,7 @@
 package ccretreat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -9,7 +10,8 @@ public class WordWrap {
 
 	public static String umbrechen(String text, int maxZeilenlänge){
 		String[] wörter = wörterUmbrechen(text);
-		String ausgabeText = ausgabeTextAufbereiten(wörter);
+		String[] zeilen = zeilenBauen(wörter, maxZeilenlänge);
+		String ausgabeText = ausgabeTextAufbereiten(zeilen);
 		return ausgabeText;
 	}
 
@@ -56,5 +58,21 @@ public class WordWrap {
 			wortgruppen.add(wortgruppe);
 		}
 		return wortgruppen.toArray(new String[][]{});
+	}
+
+	static String[] alleZeilenAusWortgruppenBauen(String[][] wortgruppen) {
+		List<String> zeilen = new ArrayList<>();
+		for(String[] wortgruppe:wortgruppen){
+			String zeile = String.join(" ", wortgruppe);
+			zeilen.add(zeile);
+		}
+		return zeilen.toArray(new String[]{});
+	}
+
+	static String[] zeilenBauen(String[] worte, int maxLength) {
+		List<String> wörter = new ArrayList<>();
+		wörter.addAll(Arrays.asList(worte));
+		String[][] zeilen = worteZusammenfassenProZeile(wörter, maxLength);
+		return alleZeilenAusWortgruppenBauen(zeilen);
 	}
 }
