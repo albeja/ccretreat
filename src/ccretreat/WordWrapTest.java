@@ -139,9 +139,6 @@ public class WordWrapTest {
 
 	private List<String> split(String wort, int maximaleZeilenlänge) {
 		List<String> silben = new ArrayList<>();
-		if(wort.length() <= maximaleZeilenlänge){
-			return Collections.singletonList(wort);
-		}
 		int loops = wort.length() / maximaleZeilenlänge;
 		for(int i = 0; i < loops; i++) {
 			silben.add(wort.substring(i * maximaleZeilenlänge, (i + 1) * maximaleZeilenlänge));
