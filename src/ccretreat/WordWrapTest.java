@@ -110,7 +110,7 @@ public class WordWrapTest {
 	}
 	
 	@Test
-	public void testName() {
+	public void zeilenAusWortgruppenBauen() {
 		String[][] wortgruppen= new String[][]{{"a", "b"}, {"c", "d"}};
 		
 		String[] expectedZeilen = new String[]{"a b", "c d"};
